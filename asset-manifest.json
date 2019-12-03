@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/reactdex/static/css/main.8bdd2c93.chunk.css",
+    "main.js": "/reactdex/static/js/main.74e67def.chunk.js",
+    "main.js.map": "/reactdex/static/js/main.74e67def.chunk.js.map",
+    "runtime-main.js": "/reactdex/static/js/runtime-main.691ccd67.js",
+    "runtime-main.js.map": "/reactdex/static/js/runtime-main.691ccd67.js.map",
+    "static/css/2.71916e70.chunk.css": "/reactdex/static/css/2.71916e70.chunk.css",
+    "static/js/2.10a2c4b7.chunk.js": "/reactdex/static/js/2.10a2c4b7.chunk.js",
+    "static/js/2.10a2c4b7.chunk.js.map": "/reactdex/static/js/2.10a2c4b7.chunk.js.map",
+    "index.html": "/reactdex/index.html",
+    "precache-manifest.a7b2bbee081cbfd7ee6c086684e4bddb.js": "/reactdex/precache-manifest.a7b2bbee081cbfd7ee6c086684e4bddb.js",
+    "service-worker.js": "/reactdex/service-worker.js",
+    "static/css/2.71916e70.chunk.css.map": "/reactdex/static/css/2.71916e70.chunk.css.map",
+    "static/css/main.8bdd2c93.chunk.css.map": "/reactdex/static/css/main.8bdd2c93.chunk.css.map",
+    "static/media/pokemon2.svg": "/reactdex/static/media/pokemon2.3cfd5e85.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.691ccd67.js",
+    "static/css/2.71916e70.chunk.css",
+    "static/js/2.10a2c4b7.chunk.js",
+    "static/css/main.8bdd2c93.chunk.css",
+    "static/js/main.74e67def.chunk.js"
+  ]
+}
