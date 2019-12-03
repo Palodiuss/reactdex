@@ -1,22 +1,94 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
+.wrapper {
+  width: 100%;
   min-height: 100vh;
+  margin: 0 auto;
+  background: #fff;
+  color: #333;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #09d3ac;
+header {
+  width: 100%;
+  padding: 15px;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-logo {
+  width: 80%;
+  max-width: 350px;
+  margin-bottom: 25px;
+}
+
+.react-select-virtualized {
+  width: 100%;
+}
+
+.pokemon-container {
+  background-color: #fff;
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pokemon-image {
+  margin-bottom: -20px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.pokemon-image:hover {
+  transition: all 0.5s;
+  transform: scale(1.15);
+}
+
+.pokemon-label {
+  font-weight: 800;
+  font-size: 18px;
+  margin-right: 5px;
+}
+
+.pokemon-species-container {
+  padding: 15px;
+  width: 100%;
+}
+
+.pokemon-species-info {
+  font-size: 18px;
+  padding: 3px 9px;
+  border-radius: 5px;
+  color: #fff;
+  background-color: green;
+  border: 1px solid #333;
+}
+
+.pokemon-species-story {
+  margin-top: 5px;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 300;
+
+  text-justify: auto;
+}
+
+.pokemon-abilities-container {
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pokemon-abilities-label {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.pokemon-abilities-info {
+  width: 100%;
 }
