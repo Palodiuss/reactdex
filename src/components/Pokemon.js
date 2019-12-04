@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "axios";
+import uuidv1 from "uuid";
+import Chart from "./Chart";
 
 export default class PokemonsList extends React.Component {
   state = {
@@ -10,7 +12,8 @@ export default class PokemonsList extends React.Component {
     pokemonSpecColor: "",
     evolutionUrl: "",
     pokemonAbilities: "",
-    pokes: []
+    pokes: [],
+    pokemonStats: []
   };
 
   componentDidMount() {
@@ -21,6 +24,7 @@ export default class PokemonsList extends React.Component {
         this.setState({
           pokemonData: res.data,
           pokes: res.data.abilities,
+          pokemonStats: res.data.stats,
           pokemonAbilities: res.data.abilities[0].ability.name
         });
       });
@@ -52,6 +56,7 @@ export default class PokemonsList extends React.Component {
           this.setState({
             pokemonData: res.data,
             pokes: res.data.abilities,
+            pokemonStats: res.data.stats,
             pokemonAbilities: res.data.abilities[0].ability.name
           });
           console.log(this.state.pokes);
@@ -107,6 +112,15 @@ export default class PokemonsList extends React.Component {
           <span className="pokemon-label">Abilities:</span>
           <Abilities abilities={this.state.pokes} />
         </div>
+
+        <div className="pokemon-stats-container">
+          <Stats stats={this.state.pokemonStats} />
+          <span className="pokemon-label">Stats:</span>
+        </div>
+
+        <div className="pokemon-stats-chart">
+          <Chart />
+        </div>
       </div>
     );
   }
@@ -120,6 +134,21 @@ const Abilities = ({ abilities }) => (
       <span className="pokemon-abilities-info" key={ability.slot}>
         {ability.ability.name}
       </span>
+    ))}
+  </>
+);
+
+const Stats = ({ stats }) => (
+  <>
+    {stats.map(stat => (
+      <div className="pokemon-stat-row" key={uuidv1()}>
+        <span className="pokemon-stat-value" key={uuidv1()}>
+          {stat.base_stat}
+        </span>
+        <span className="pokemon-stat-label" key={uuidv1()}>
+          {stat.stat.name}
+        </span>
+      </div>
     ))}
   </>
 );

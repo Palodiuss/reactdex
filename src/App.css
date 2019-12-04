@@ -49,6 +49,8 @@ header {
 }
 
 .pokemon-label {
+  width: 100%;
+  margin-bottom: 5px;
   font-weight: 800;
   font-size: 18px;
   margin-right: 5px;
@@ -84,11 +86,31 @@ header {
   flex-direction: column;
 }
 
-.pokemon-abilities-label {
-  width: 100%;
-  margin-bottom: 5px;
-}
-
 .pokemon-abilities-info {
   width: 100%;
+}
+
+.pokemon-stats-container {
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.pokemon-stat-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 8% 40%;
+  column-gap: 10px;
+  font-size: 14px;
+}
+
+.pokemon-stat-value {
+  justify-self: end;
+}
+
+.pokemon-stats-chart {
+  width: 100%;
+  padding: 20px;
+  height: 300px;
 }

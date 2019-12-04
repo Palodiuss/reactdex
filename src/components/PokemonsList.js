@@ -13,7 +13,7 @@ export default class PokemonsList extends React.Component {
 
   componentDidMount() {
     isLoadingExternally = true;
-    axios.get(`https://pokeapi.co/api/v2/pokemon?limit=50`).then(res => {
+    axios.get(`https://pokeapi.co/api/v2/pokemon?limit=964`).then(res => {
       let newRes = res.data.results.map(pokemon => {
         let url = pokemon.url.split("/");
         let id = url.pop() || url.pop();
@@ -56,12 +56,11 @@ export default class PokemonsList extends React.Component {
     return (
       <Select
         //classNamePrefix="pokemons-list"
+        placeholder={"Select your pokemon"}
         formatOptionLabel={formatOptionLabel}
-        name="form-field-name"
+        name={"form-field-name"}
         value={this.state.selectedValue}
         onChange={this.handleChange}
-        clearable={true}
-        searchable={true}
         isLoading={isLoadingExternally}
         options={this.state.pokemons}
         optionHeight={60}
@@ -111,7 +110,7 @@ const colourStyles = {
   //     //border: isFocused ? "green" : "blue"
   //   };
   // },
-  control: styles => ({ ...styles, marginLeft: "10px" }),
+  // control: styles => ({ ...styles, marginLeft: "10px" }),
   input: styles => ({ ...styles, marginLeft: "10px" }),
   placeholder: styles => ({ ...styles, marginLeft: "10px" }),
   singleValue: (styles, { data }) => ({
