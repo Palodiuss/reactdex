@@ -20,13 +20,13 @@ export default class PokemonsList extends React.Component {
     axios
       .get(`https://pokeapi.co/api/v2/pokemon/${this.props.id}`)
       .then(res => {
-        console.log(res.data);
         this.setState({
           pokemonData: res.data,
           pokes: res.data.abilities,
           pokemonStats: res.data.stats,
           pokemonAbilities: res.data.abilities[0].ability.name
         });
+        this.props.parentCallback(res.data.types);
       });
 
     axios
@@ -59,7 +59,7 @@ export default class PokemonsList extends React.Component {
             pokemonStats: res.data.stats,
             pokemonAbilities: res.data.abilities[0].ability.name
           });
-          console.log(this.state.pokes);
+          this.props.parentCallback(res.data.types);
         });
 
       axios
@@ -96,12 +96,18 @@ export default class PokemonsList extends React.Component {
             backgroundSize: "cover"
           }}
         ></div>
+        <h1 className="pokemon-name">{this.state.pokemonData.name}</h1>
         <div className="pokemon-species-container">
-          <span className="pokemon-label">Species:</span>
           <span
             className="pokemon-species-info"
             style={{
-              backgroundColor: `${this.state.pokemonSpecColor}`
+              backgroundColor: `${this.state.pokemonSpecColor}`,
+              boxShadow: `0 0 5px ${this.state.pokemonSpecColor}`,
+              color:
+                this.state.pokemonSpecColor === "white" ||
+                this.state.pokemonSpecColor === "yellow"
+                  ? "#333"
+                  : "#fafafa"
             }}
           >
             {this.state.pokemonSpec}

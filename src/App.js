@@ -6,21 +6,74 @@ import logo from "./pokemon2.svg";
 
 class App extends Component {
   state = {
-    selected: ""
+    selected: "",
+    selectedColor: ""
   };
 
   getPokemon = pokemon => {
     this.setState({ selected: pokemon });
   };
 
+  getColor = types => {
+    types.forEach(type => {
+      if (type.slot === 1) this.setState({ selectedColor: type.type.name });
+    });
+
+    console.log(this.state.selectedColor);
+
+    //this.setState({ selectedColor: color[0] });
+  };
+
+  gradients = color => {
+    console.log(color);
+    switch (color) {
+      case "fire":
+        return "#FB9B51, #FBAE46";
+      case "water":
+        return "#FB9B51, #FBAE46";
+      case "grass":
+        return "#5fbc51, #5ac178";
+      case "electric":
+        return "#EDD53E, #FBE273";
+      case "psychic":
+        return "#EC8CE5, #F3A7E7";
+      case "ice":
+        return "#70CCBD, #8CDDD4";
+      case "dragon":
+        return "#516AAC, #7773D4";
+      case "dark":
+        return "#595761, #6E7587";
+      case "fairy":
+        return "#F66F71, #FE9F92";
+      case "normal":
+        return "#C5B489, #D7CD90";
+      case "fighting":
+        return "#CE4265, #E74347";
+      case "flying":
+        return "#516AAC, #7773D4";
+
+      default:
+        return "#2CD8D5, #6B8DD6, #8E37D7";
+    }
+  };
+
   render() {
     return (
-      <div className="wrapper">
+      <div
+        className="wrapper"
+        style={{
+          backgroundImage: `linear-gradient(to right, ${this.gradients(
+            this.state.selectedColor
+          )})`
+        }}
+      >
         <header>
           <img className="header-logo" src={logo} alt="Pokémon"></img>
           <PokemonsList parentCallback={this.getPokemon} />
         </header>
-        {this.state.selected && <Pokemon id={this.state.selected} />}
+        {this.state.selected && (
+          <Pokemon parentCallback={this.getColor} id={this.state.selected} />
+        )}
       </div>
     );
   }
