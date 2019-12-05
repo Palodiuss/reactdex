@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/reactdex/static/css/main.7eaa5e2d.chunk.css",
-    "main.js": "/reactdex/static/js/main.f33fee00.chunk.js",
-    "main.js.map": "/reactdex/static/js/main.f33fee00.chunk.js.map",
+    "main.css": "/reactdex/static/css/main.1671d281.chunk.css",
+    "main.js": "/reactdex/static/js/main.d5f09e00.chunk.js",
+    "main.js.map": "/reactdex/static/js/main.d5f09e00.chunk.js.map",
     "runtime-main.js": "/reactdex/static/js/runtime-main.691ccd67.js",
     "runtime-main.js.map": "/reactdex/static/js/runtime-main.691ccd67.js.map",
     "static/css/2.71916e70.chunk.css": "/reactdex/static/css/2.71916e70.chunk.css",
     "static/js/2.a3cd0443.chunk.js": "/reactdex/static/js/2.a3cd0443.chunk.js",
     "static/js/2.a3cd0443.chunk.js.map": "/reactdex/static/js/2.a3cd0443.chunk.js.map",
     "index.html": "/reactdex/index.html",
-    "precache-manifest.ded5ab695e45903094bc01e7abeb39a4.js": "/reactdex/precache-manifest.ded5ab695e45903094bc01e7abeb39a4.js",
+    "precache-manifest.1d6383b43874a18c4835c60b2f8194be.js": "/reactdex/precache-manifest.1d6383b43874a18c4835c60b2f8194be.js",
     "service-worker.js": "/reactdex/service-worker.js",
     "static/css/2.71916e70.chunk.css.map": "/reactdex/static/css/2.71916e70.chunk.css.map",
-    "static/css/main.7eaa5e2d.chunk.css.map": "/reactdex/static/css/main.7eaa5e2d.chunk.css.map",
+    "static/css/main.1671d281.chunk.css.map": "/reactdex/static/css/main.1671d281.chunk.css.map",
     "static/media/pokemon2.svg": "/reactdex/static/media/pokemon2.3cfd5e85.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.691ccd67.js",
     "static/css/2.71916e70.chunk.css",
     "static/js/2.a3cd0443.chunk.js",
-    "static/css/main.7eaa5e2d.chunk.css",
-    "static/js/main.f33fee00.chunk.js"
+    "static/css/main.1671d281.chunk.css",
+    "static/js/main.d5f09e00.chunk.js"
   ]
 }
