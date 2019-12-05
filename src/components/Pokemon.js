@@ -221,10 +221,18 @@ const pokeColors = color => {
 
 const Description = descriptions => {
   var text = "";
-  descriptions.descriptions.forEach(description => {
-    if (description.language.name === "en")
-      text = <p className="pokemon-species-story">{description.flavor_text}</p>;
-  });
+  console.log(descriptions.descriptions.length);
+
+  for (let i = 0; i < descriptions.descriptions.length; i++) {
+    if (descriptions.descriptions[i].language.name === "en") {
+      let flavor = descriptions.descriptions[i].flavor_text.replace(
+        /(\r\n|\n|\r)/gm,
+        " "
+      );
+      text = <p className="pokemon-species-story">{flavor}</p>;
+      break;
+    }
+  }
 
   return text;
 };
