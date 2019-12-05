@@ -1,30 +1,11 @@
 import React, { Component } from "react";
-import { Radar, Bar } from "react-chartjs-2";
+import { Radar } from "react-chartjs-2";
 
 class Chart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      chartData: {
-        labels: [
-          "hp",
-          "attack",
-          "defense",
-          "special-attack",
-          "special-defense",
-          "speed"
-        ],
-        datasets: [
-          {
-            label: "stats",
-            data: [91, 100, 95, 100, 100, 82],
-            backgroundColor: "rgba(59, 96, 252, 0.6)",
-            pointStyle: "circle",
-
-            pointRadius: 3
-          }
-        ]
-      }
+      chartData: props.chartData
     };
   }
   render() {
@@ -35,10 +16,6 @@ class Chart extends Component {
 export default Chart;
 
 const options = {
-  // scales: {
-  //   yAxes: [{ ticks: { beginAtZero: true, maximum: 300, fontSize: 16 } }],
-  //   xAxes: [{ ticks: { beginAtZero: true, fontSize: 16 } }]
-  // }
   scale: {
     angleLines: {
       display: false
@@ -49,7 +26,7 @@ const options = {
       },
       backdropColor: "rgba(0, 0, 0, 0)",
       suggestedMin: 0,
-      suggestedMax: 180,
+      suggestedMax: 140,
       stepSize: 20
     }
   },

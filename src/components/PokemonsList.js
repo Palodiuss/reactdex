@@ -13,7 +13,7 @@ export default class PokemonsList extends React.Component {
 
   componentDidMount() {
     isLoadingExternally = true;
-    axios.get(`https://pokeapi.co/api/v2/pokemon?limit=964`).then(res => {
+    axios.get(`https://pokeapi.co/api/v2/pokemon?limit=721`).then(res => {
       let newRes = res.data.results.map(pokemon => {
         let url = pokemon.url.split("/");
         let id = url.pop() || url.pop();

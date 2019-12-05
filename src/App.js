@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PokemonsList from "./components/PokemonsList";
 import Pokemon from "./components/Pokemon";
 import "./App.css";
-import logo from "./pokemon2.svg";
+import logo from "./logo.svg";
 
 class App extends Component {
   state = {
@@ -19,18 +19,15 @@ class App extends Component {
       if (type.slot === 1) this.setState({ selectedColor: type.type.name });
     });
 
-    console.log(this.state.selectedColor);
-
     //this.setState({ selectedColor: color[0] });
   };
 
   gradients = color => {
-    console.log(color);
     switch (color) {
       case "fire":
         return "#FB9B51, #FBAE46";
       case "water":
-        return "#FB9B51, #FBAE46";
+        return "#559EDF, #69B9E3";
       case "grass":
         return "#5fbc51, #5ac178";
       case "electric":
@@ -51,9 +48,22 @@ class App extends Component {
         return "#CE4265, #E74347";
       case "flying":
         return "#516AAC, #7773D4";
+      case "poison":
+        return "#A864C7, #C261D4";
+      case "ground":
+        return "#C5B489, #D7CD90";
+      case "rock":
+        //fix
+        return "#C5B489, #D7CD90";
+      case "bug":
+        return "#92BC2C, #AFC836";
+      case "ghost":
+        return "#516AAC, #7773D4";
+      case "steel":
+        return "#9298A4, #A3A49E";
 
       default:
-        return "#2CD8D5, #6B8DD6, #8E37D7";
+        return "#FAFAFA, #F5F5F5";
     }
   };
 
