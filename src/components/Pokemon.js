@@ -13,8 +13,36 @@ export default class PokemonsList extends React.Component {
     pokemonTypes: [],
     pokemonStats: [],
     pokemonStory: [],
+    pokemonEvolutions: [],
+    pokemonEvoImages: [],
     loading: true
   };
+
+  getEvolutions() {
+    const evolutions = [];
+    const images = [];
+    let nextEvolution;
+    let data = this.state.pokemonSpecies;
+
+    if (data) {
+      axios.get(data.evolution_chain.url).then(res => {
+        evolutions.push(res.data.chain.species.name);
+        images.push(getID(res.data.chain.species.url));
+        nextEvolution = res.data.chain.evolves_to;
+        while (nextEvolution.length) {
+          evolutions.push(nextEvolution[0].species.name);
+          images.push(getID(nextEvolution[0].species.url));
+          nextEvolution = nextEvolution[0].evolves_to;
+        }
+        console.log(evolutions);
+        console.log(images);
+        this.setState({
+          pokemonEvolutions: evolutions,
+          pokemonEvoImages: images
+        });
+      });
+    }
+  }
 
   componentDidMount() {
     this.setState({ loading: true });
@@ -39,6 +67,7 @@ export default class PokemonsList extends React.Component {
           evolutionUrl: res.data.evolution_chain.url,
           loading: false
         });
+        this.getEvolutions();
       });
   }
 
@@ -67,6 +96,8 @@ export default class PokemonsList extends React.Component {
             evolutionUrl: res.data.evolution_chain.url,
             loading: false
           });
+          this.getEvolutions();
+          console.log(this.state.pokemonEvolutions);
         });
     }
   }
@@ -108,6 +139,31 @@ export default class PokemonsList extends React.Component {
                 this.state.pokemonTypes
               )}
             />
+          </div>
+
+          <div className="pokemon-evolutions">
+            <h2 className="pokemon-evolutions-title">Evolutions</h2>
+
+            <div className="evolutions-images-container">
+              {this.state.pokemonEvoImages.map(image => (
+                <div
+                  key={uuidv1()}
+                  className="pokemon-evo-image"
+                  style={{
+                    backgroundImage: `url(./pokemon/${image}.png)`,
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover"
+                  }}
+                ></div>
+              ))}
+            </div>
+            <div className="evolutions-labels">
+              {this.state.pokemonEvolutions.map(evolution => (
+                <span className="evolution-name" key={uuidv1()}>
+                  {evolution}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       );
@@ -221,7 +277,6 @@ const pokeColors = color => {
 
 const Description = descriptions => {
   var text = "";
-  console.log(descriptions.descriptions.length);
 
   for (let i = 0; i < descriptions.descriptions.length; i++) {
     if (descriptions.descriptions[i].language.name === "en") {
@@ -241,7 +296,7 @@ const getPrimaryColor = types => {
   types.forEach(type => {
     if (type.slot === 1) {
       let color = pokeColors(type.type.name);
-      console.log(color);
+
       return color;
     }
   });
@@ -264,4 +319,10 @@ const getChartData = (data, types) => {
   };
 
   return chartData;
+};
+
+const getID = url => {
+  let newUrl = url.split("/");
+  let id = newUrl.pop() || newUrl.pop();
+  return id;
 };

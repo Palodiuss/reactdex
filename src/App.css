@@ -55,6 +55,41 @@ header {
   cursor: pointer;
 }
 
+.pokemon-evo-image {
+  width: 100px;
+  height: 100px;
+}
+
+.pokemon-evolutions-title {
+  text-align: center;
+}
+
+.pokemon-evolutions {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.evolutions-labels {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.evolution-name {
+  width: 100px;
+  text-align: center;
+}
+
+.evolutions-images-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  margin-bottom: 5px;
+}
+
 .pokemon-label {
   width: 100%;
   margin-bottom: 5px;
@@ -73,13 +108,13 @@ header {
 
 .pokemon-types-container {
   display: flex;
-  column-gap: 10px;
 }
 
 .pokemon-species-info {
   min-width: 100px;
   font-size: 18px;
   padding: 5px 9px;
+  margin: 0 5px 0 5px;
   border-radius: 10px;
   color: #fafafa;
   text-align: center;
