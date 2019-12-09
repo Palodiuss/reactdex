@@ -2,21 +2,27 @@ import React from "react";
 import axios from "axios";
 import uuidv1 from "uuid";
 import Chart from "./Chart";
+import Moves from "./Moves";
+import Types from "./Types";
+import pokeColors from "./Colors";
+import Stats from "./Stats";
+import Description from "./Description";
 
 export default class PokemonsList extends React.Component {
-  state = {
-    id: "",
-    pokemonData: "",
-    pokemonSpecies: "",
-    evolutionUrl: "",
-    pokemonAbilities: [],
-    pokemonTypes: [],
-    pokemonStats: [],
-    pokemonStory: [],
-    pokemonEvolutions: [],
-    pokemonEvoImages: [],
-    loading: true
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: "",
+      pokemonData: "",
+      pokemonSpecies: "",
+      evolutionUrl: "",
+      pokemonStory: [],
+      pokemonEvolutions: [],
+      pokemonEvoImages: [],
+      loading: true,
+      menuOption: "stats"
+    };
+  }
 
   getEvolutions() {
     const evolutions = [];
@@ -34,8 +40,6 @@ export default class PokemonsList extends React.Component {
           images.push(getID(nextEvolution[0].species.url));
           nextEvolution = nextEvolution[0].evolves_to;
         }
-        console.log(evolutions);
-        console.log(images);
         this.setState({
           pokemonEvolutions: evolutions,
           pokemonEvoImages: images
@@ -44,17 +48,19 @@ export default class PokemonsList extends React.Component {
     }
   }
 
+  click() {
+    console.log("asd");
+  }
+
   componentDidMount() {
     this.setState({ loading: true });
     axios
       .get(`https://pokeapi.co/api/v2/pokemon/${this.props.id}`)
       .then(res => {
         this.setState({
-          pokemonData: res.data,
-          pokemonAbilities: res.data.abilities,
-          pokemonTypes: res.data.types,
-          pokemonStats: res.data.stats
+          pokemonData: res.data
         });
+
         this.props.parentCallback(res.data.types);
       });
 
@@ -63,8 +69,6 @@ export default class PokemonsList extends React.Component {
       .then(res => {
         this.setState({
           pokemonSpecies: res.data,
-          pokemonStory: res.data.flavor_text_entries,
-          evolutionUrl: res.data.evolution_chain.url,
           loading: false
         });
         this.getEvolutions();
@@ -78,10 +82,7 @@ export default class PokemonsList extends React.Component {
         .get(`https://pokeapi.co/api/v2/pokemon/${this.props.id}`)
         .then(res => {
           this.setState({
-            pokemonData: res.data,
-            pokemonTypes: res.data.types,
-            pokemonAbilities: res.data.abilities,
-            pokemonStats: res.data.stats
+            pokemonData: res.data
           });
           this.props.parentCallback(res.data.types);
         });
@@ -92,55 +93,34 @@ export default class PokemonsList extends React.Component {
           this.setState({
             pokemonSpecies: res.data,
 
-            pokemonStory: res.data.flavor_text_entries,
-            evolutionUrl: res.data.evolution_chain.url,
             loading: false
           });
           this.getEvolutions();
-          console.log(this.state.pokemonEvolutions);
         });
     }
   }
 
-  render() {
-    if (!this.state.loading)
-      return (
-        <div className="pokemon-container">
-          <div
-            className="pokemon-image"
-            style={{
-              backgroundImage: `url(./pokemon/${this.props.id}.png)`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover"
-            }}
-          ></div>
-          <h1 className="pokemon-name">{this.state.pokemonData.name}</h1>
-          <div className="pokemon-species-container">
-            <div className="pokemon-types-container">
-              <Types types={this.state.pokemonTypes} />
-            </div>
-
-            <Description descriptions={this.state.pokemonStory} />
-          </div>
-          <div className="pokemon-abilities-container">
-            <span className="pokemon-label">Abilities:</span>
-            <Abilities abilities={this.state.pokemonAbilities} />
-          </div>
-
+  renderOption = ({ option }) => {
+    console.log(option);
+    //console.log(this);
+    switch (option) {
+      case "stats":
+        return (
           <div className="pokemon-stats-container">
-            <Stats stats={this.state.pokemonStats} />
+            <Stats pokeData={this.state.pokemonData} />
             <span className="pokemon-label">Stats:</span>
           </div>
+        );
 
-          <div className="pokemon-stats-chart">
-            <Chart
-              chartData={getChartData(
-                this.state.pokemonStats,
-                this.state.pokemonTypes
-              )}
-            />
+      case "moves":
+        return (
+          <div className="pokemon-moves-container">
+            <span className="pokemon-label">Moves:</span>
+            <Moves pokeData={this.state.pokemonData} />
           </div>
-
+        );
+      case "evolutions":
+        return (
           <div className="pokemon-evolutions">
             <h2 className="pokemon-evolutions-title">Evolutions</h2>
 
@@ -150,7 +130,7 @@ export default class PokemonsList extends React.Component {
                   key={uuidv1()}
                   className="pokemon-evo-image"
                   style={{
-                    backgroundImage: `url(./pokemon/${image}.png)`,
+                    backgroundImage: `url(./img/pokemons-optimized/${image}.png)`,
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover"
                   }}
@@ -165,142 +145,167 @@ export default class PokemonsList extends React.Component {
               ))}
             </div>
           </div>
+        );
+
+      default:
+        return <div>asd</div>;
+    }
+  };
+
+  render() {
+    if (!this.state.loading)
+      return (
+        <div className="pokemon-container">
+          <div
+            className="pokemon-image"
+            style={{
+              backgroundImage: `url(./img/pokemons-optimized/${this.props.id}.png)`,
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover"
+            }}
+          ></div>
+          <h1 className="pokemon-name">{this.state.pokemonData.name}</h1>
+          <div className="pokemon-species-container">
+            <div className="pokemon-types-container">
+              <Types pokeData={this.state.pokemonData} />
+            </div>
+
+            <Description pokeData={this.state.pokemonSpecies} />
+          </div>
+
+          <div className="buttons-container">
+            <div
+              className="button"
+              onClick={() => this.setState({ menuOption: "stats" })}
+              style={
+                this.state.menuOption === "stats"
+                  ? {
+                      backgroundColor: `${pokeColors(
+                        this.state.pokemonData.types[0].type.name
+                      )}`,
+
+                      boxShadow: `0 0 5px ${pokeColors(
+                        this.state.pokemonData.types[0].type.name
+                      )}`,
+                      color: "#fafafa"
+                    }
+                  : {
+                      backgroundColor: "#fafafa",
+                      boxShadow: "none",
+                      color: `${pokeColors(
+                        this.state.pokemonData.types[0].type.name
+                      )}`
+                    }
+              }
+            >
+              STATS
+            </div>
+            <div
+              className="button"
+              onClick={() => this.setState({ menuOption: "evolutions" })}
+              style={
+                this.state.menuOption === "evolutions"
+                  ? {
+                      backgroundColor: `${pokeColors(
+                        this.state.pokemonData.types[0].type.name
+                      )}`,
+
+                      boxShadow: `0 0 5px ${pokeColors(
+                        this.state.pokemonData.types[0].type.name
+                      )}`,
+                      color: "#fafafa"
+                    }
+                  : {
+                      backgroundColor: "#fafafa",
+                      boxShadow: "none",
+                      color: `${pokeColors(
+                        this.state.pokemonData.types[0].type.name
+                      )}`
+                    }
+              }
+            >
+              EVOLUTIONS
+            </div>
+            <div
+              className="button"
+              onClick={() => this.setState({ menuOption: "moves" })}
+              style={
+                this.state.menuOption === "moves"
+                  ? {
+                      backgroundColor: `${pokeColors(
+                        this.state.pokemonData.types[0].type.name
+                      )}`,
+
+                      boxShadow: `0 0 5px ${pokeColors(
+                        this.state.pokemonData.types[0].type.name
+                      )}`,
+                      color: "#fafafa"
+                    }
+                  : {
+                      backgroundColor: "#fafafa",
+                      boxShadow: "none",
+                      color: `${pokeColors(
+                        this.state.pokemonData.types[0].type.name
+                      )}`
+                    }
+              }
+            >
+              MOVES
+            </div>
+          </div>
+
+          {this.state.menuOption === "moves" ? (
+            <div className="pokemon-moves-container">
+              <Moves pokeData={this.state.pokemonData} />
+            </div>
+          ) : null}
+
+          {this.state.menuOption === "stats" ? (
+            <div>
+              {" "}
+              {/* <div className="pokemon-stats-container">
+                <Stats pokeData={this.state.pokemonData} />
+              </div> */}
+              <div className="pokemon-stats-chart">
+                <Chart
+                  chartData={getChartData(
+                    this.state.pokemonData.stats,
+                    this.state.pokemonData.types
+                  )}
+                />
+              </div>
+            </div>
+          ) : null}
+
+          {this.state.menuOption === "evolutions" ? (
+            <div className="pokemon-evolutions">
+              <div className="evolutions-images-container">
+                {this.state.pokemonEvoImages.map(image => (
+                  <div
+                    key={uuidv1()}
+                    className="pokemon-evo-image"
+                    style={{
+                      backgroundImage: `url(./img/pokemons-optimized/${image}.png)`,
+                      backgroundRepeat: "no-repeat",
+                      backgroundSize: "cover"
+                    }}
+                  ></div>
+                ))}
+              </div>
+              <div className="evolutions-labels">
+                {this.state.pokemonEvolutions.map(evolution => (
+                  <span className="evolution-name" key={uuidv1()}>
+                    {evolution}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ) : null}
         </div>
       );
     else return <div>Loading...</div>;
   }
 }
-
-const Abilities = ({ abilities }) => (
-  <>
-    {abilities.map(ability => (
-      <span className="pokemon-abilities-info" key={ability.slot}>
-        {ability.ability.name}
-      </span>
-    ))}
-  </>
-);
-
-const Stats = ({ stats }) => (
-  <>
-    {stats.map(stat => (
-      <div className="pokemon-stat-row" key={uuidv1()}>
-        <span className="pokemon-stat-value" key={uuidv1()}>
-          {stat.base_stat}
-        </span>
-        <span className="pokemon-stat-label" key={uuidv1()}>
-          {stat.stat.name}
-        </span>
-      </div>
-    ))}
-  </>
-);
-
-const getStats = stats => {
-  let statsArray = [];
-  if (stats.length) {
-    statsArray = stats.map(stat => {
-      return stat.base_stat;
-    });
-  }
-  return statsArray;
-};
-
-const Types = ({ types }) => {
-  let pokeColor = "";
-  if (types) {
-    return (
-      <>
-        {types.map(type => {
-          pokeColor = pokeColors(type.type.name);
-          return (
-            <span
-              className="pokemon-species-info"
-              style={{
-                backgroundColor: `${pokeColor}`,
-                boxShadow: `0 0 5px ${pokeColor}`
-              }}
-              key={uuidv1()}
-            >
-              {type.type.name}
-            </span>
-          );
-        })}
-      </>
-    );
-  }
-};
-
-const pokeColors = color => {
-  switch (color) {
-    case "fire":
-      return "#FB9B51";
-    case "water":
-      return "#559EDF";
-    case "grass":
-      return "#5fbc51";
-    case "electric":
-      return "#EDD53E";
-    case "psychic":
-      return "#EC8CE5";
-    case "ice":
-      return "#70CCBD";
-    case "dragon":
-      return "#516AAC";
-    case "dark":
-      return "#595761";
-    case "fairy":
-      return "#F66F71";
-    case "normal":
-      return "#C5B489";
-    case "fighting":
-      return "#CE42657";
-    case "flying":
-      return "#516AAC";
-    case "poison":
-      return "#A864C7";
-    case "ground":
-      return "#C5B489";
-    case "rock":
-      return "#C5B489";
-    case "bug":
-      return "#92BC2C6";
-    case "ghost":
-      return "#516AAC";
-    case "steel":
-      return "#9298A4";
-
-    default:
-      return "#FAFAFA";
-  }
-};
-
-const Description = descriptions => {
-  var text = "";
-
-  for (let i = 0; i < descriptions.descriptions.length; i++) {
-    if (descriptions.descriptions[i].language.name === "en") {
-      let flavor = descriptions.descriptions[i].flavor_text.replace(
-        /(\r\n|\n|\r)/gm,
-        " "
-      );
-      text = <p className="pokemon-species-story">{flavor}</p>;
-      break;
-    }
-  }
-
-  return text;
-};
-
-const getPrimaryColor = types => {
-  types.forEach(type => {
-    if (type.slot === 1) {
-      let color = pokeColors(type.type.name);
-
-      return color;
-    }
-  });
-};
 
 const getChartData = (data, types) => {
   let pokeData = getStats(data);
@@ -319,6 +324,16 @@ const getChartData = (data, types) => {
   };
 
   return chartData;
+};
+
+const getStats = stats => {
+  let statsArray = [];
+  if (stats.length) {
+    statsArray = stats.map(stat => {
+      return stat.base_stat;
+    });
+  }
+  return statsArray;
 };
 
 const getID = url => {

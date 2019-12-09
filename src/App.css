@@ -113,13 +113,31 @@ header {
 .pokemon-species-info {
   min-width: 100px;
   font-size: 18px;
+  font-weight: 500;
   padding: 5px 9px;
   margin: 0 5px 0 5px;
-  border-radius: 10px;
+  border-radius: 16px;
   color: #fafafa;
   text-align: center;
   background-color: #92bc2c;
   box-shadow: 0 0 5px #92bc2c;
+}
+
+.button {
+  min-width: 100px;
+  font-size: 14px;
+  padding: 10px 15px;
+  margin: 0;
+  border-radius: 18px;
+  text-align: center;
+
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.buttons-container {
+  display: flex;
 }
 
 .pokemon-species-story {
@@ -132,12 +150,38 @@ header {
   text-justify: auto;
 }
 
-.pokemon-abilities-container {
+.pokemon-moves-container {
   width: 100%;
 
-  padding: 15px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
+  justify-items: center;
+}
+
+.pokemon-move {
+  height: 75px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom: 0.5px solid rgba(164, 164, 164, 0.5);
+}
+
+.pokemon-move:last-child {
+  border-bottom: none;
+}
+
+.move-name {
+  font-size: 19px;
+  line-height: 25px;
+  height: 25px;
+}
+
+.move-lvl {
+  font-size: 15px;
+  line-height: 20px;
+  height: 20px;
+  color: #a4a4a4;
 }
 
 .pokemon-abilities-info {
