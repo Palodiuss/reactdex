@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/reactdex/static/css/main.25697bb6.chunk.css",
+    "main.css": "/reactdex/static/css/main.a478d59d.chunk.css",
     "main.js": "/reactdex/static/js/main.5c46c4aa.chunk.js",
     "main.js.map": "/reactdex/static/js/main.5c46c4aa.chunk.js.map",
     "runtime-main.js": "/reactdex/static/js/runtime-main.691ccd67.js",
@@ -9,17 +9,17 @@
     "static/js/2.9c855657.chunk.js": "/reactdex/static/js/2.9c855657.chunk.js",
     "static/js/2.9c855657.chunk.js.map": "/reactdex/static/js/2.9c855657.chunk.js.map",
     "index.html": "/reactdex/index.html",
-    "precache-manifest.fd79e2cc4ab7465d71e42bb83281b95b.js": "/reactdex/precache-manifest.fd79e2cc4ab7465d71e42bb83281b95b.js",
+    "precache-manifest.a80d20bd29f564ed95a3c5d8267e2fd9.js": "/reactdex/precache-manifest.a80d20bd29f564ed95a3c5d8267e2fd9.js",
     "service-worker.js": "/reactdex/service-worker.js",
     "static/css/2.71916e70.chunk.css.map": "/reactdex/static/css/2.71916e70.chunk.css.map",
-    "static/css/main.25697bb6.chunk.css.map": "/reactdex/static/css/main.25697bb6.chunk.css.map",
+    "static/css/main.a478d59d.chunk.css.map": "/reactdex/static/css/main.a478d59d.chunk.css.map",
     "static/media/logo.svg": "/reactdex/static/media/logo.3cfd5e85.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.691ccd67.js",
     "static/css/2.71916e70.chunk.css",
     "static/js/2.9c855657.chunk.js",
-    "static/css/main.25697bb6.chunk.css",
+    "static/css/main.a478d59d.chunk.css",
     "static/js/main.5c46c4aa.chunk.js"
   ]
 }
